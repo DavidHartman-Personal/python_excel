@@ -13,10 +13,10 @@ with open('LICENSE') as f:
 setup(
     name='sample',
     version='0.1.0',
-    description='David Hartman Python Template',
+    description='Python excel utilities',
     long_description=readme,
     author='David Hartman',
-    author_email='dhartman@challengetaker.com',
+    author_email='david.j.hartman@gmail.com',
     url='TBD',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
