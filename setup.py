@@ -11,7 +11,7 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='sample',
+    name='excel_workbook',
     version='0.1.0',
     description='Python excel utilities',
     long_description=readme,

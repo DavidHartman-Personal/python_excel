@@ -8,7 +8,7 @@ Any imports/dependencies/requirements should be noted here (e.g. argparse, etc.)
 """
 
 # import any functions inside or outside of this module.  If no helpers are needed it can be removed from here
-# as well as remove the file from the sample module.
+# as well as remove the file from the excel_workbook module.
 from . import helpers
 
 def get_hmm():
