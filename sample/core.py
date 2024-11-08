@@ -3,7 +3,7 @@
 This is considered the main or core script for a project/task.  It is likely where the __main__ function
 would be defined.
 
-Any imports/dependencies/requirements should be noted here (e.g. argparse, etc)
+Any imports/dependencies/requirements should be noted here (e.g. argparse, etc.)
 
 """
 
