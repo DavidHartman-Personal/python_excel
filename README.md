@@ -4,13 +4,14 @@ This repository is based on a default Python project template.  The various reso
 
 Actions/Tasks/Log
 - Create main excel workbook class.
+- Add configuration file modules, code, etc.
 
 * [x] Update setup.py
 * [x] Rename main python directory (from sample to excel_workbook)
 * [ ] Create cacher snippet/document for working with python argparser
 * [ ] Create cacher snippet/document for working with python logging
 * [ ] Create cacher snippet/document for working with python configurations
-* 
+* [ ] Add docstrings and create documentation automatically
 
 ## docs/
 
@@ -19,6 +20,7 @@ Contains files that create and manage documentation for the project.  These reso
 ## excel_workbook/
 
 This is the main code directory where the main python project code resides.  This folder is really just for reference and should be removed and/or renamed based on this projects purpose.
+
 
 ## tests/
 
