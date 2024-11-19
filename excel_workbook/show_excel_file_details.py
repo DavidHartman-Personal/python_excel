@@ -7,7 +7,8 @@ This script will open an Excel Workbook and then show some details about the wor
 import argparse
 import os
 import excel_workbook
-
+import logging
+import coloredlogs
 
 #: This effectively defines the root of the project and so adding ..\, etc. is not needed in config files
 PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -25,7 +26,15 @@ EXCEL_FILE_DIR = os.path.join(PROJECT_ROOT_DIR, 'excel_files')
 FILENAME_INPUT_CONFIG = os.environ.get('CONFIG_FILE_PATH',
                                        os.path.join(CONF_DIR, 'excel.conf'))
 
+coloredlogs.install(level=logging.DEBUG,
+                    fmt="%(asctime)s %(hostname)s %(name)s %(filename)s line-%(lineno)d %(levelname)s - %(message)s",
+                    datefmt='%H:%M:%S')
+
 def main():
+    """The main method for this script.
+
+    """
+
     source_spreadsheet_name = "sample.xlsx"
     source_spreadsheet_file = os.path.join(EXCEL_FILE_DIR, source_spreadsheet_name)
 
@@ -37,9 +46,11 @@ def main():
         nargs='?',
         default=source_spreadsheet_file
     )
-    args = parser.parse_args()
-    excel_wb=excel_workbook.ExcelWorkbook(source_spreadsheet_file)
 
+    logging.info("Getting excel info")
+    args = parser.parse_args()
+    excel_wb = excel_workbook.ExcelWorkbook(source_spreadsheet_file)
+    excel_ws = excel_wb.get_worksheets()
 
     # get_spreadsheet_cols(args.input_file, print_cols=True)
 
