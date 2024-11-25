@@ -79,11 +79,16 @@ class ExcelWorkbook:
         logging.info("Table data dictionary [%s]:", str(return_dictionary_list))
         return return_dictionary_list
 
-    def get_worksheets(self):
+    def get_worksheets(self) -> []:
+        """Returns an array of the worksheet objects in the workbook
+
+        Returns:
+            array object:
+        """
         return_worksheets_list = []
         for ws in self.workbook.worksheets:
             return_worksheets_list.append(ws.title)
-            logging.debug("Looking at worksheet: [%s]", str(ws))
+            # logging.debug("Looking at worksheet: [%s]", str(ws))
             # let's add it to the dictionary of worksheets if we haven't already
             if not self.worksheets.get(ws.title):
                 worksheet_object = {}
@@ -95,6 +100,6 @@ class ExcelWorkbook:
                     worksheet_tables['TABLE_NAME'] = table_dictionary
                 worksheet_object['WORKSHEET_NAME'] = worksheet_title
                 self.worksheets[ws.title] = worksheet_object
-        logging.debug("Worksheets [%s]:", str(return_worksheets_list))
+        # logging.debug("Worksheets [%s]:", str(return_worksheets_list))
         return return_worksheets_list
 
