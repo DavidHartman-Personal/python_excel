@@ -32,7 +32,6 @@ DEFAULT_HEADER_ROW='1'
 DEFAULT_FIRST_COL='A'
 DEFAULT_LAST_COL='B'
 
-
 coloredlogs.install(level=logging.DEBUG,
                     fmt="%(asctime)s %(hostname)s %(name)s %(filename)s line-%(lineno)d %(levelname)s - %(message)s",
                     datefmt='%H:%M:%S')
@@ -65,6 +64,8 @@ def main():
     logging.info("Getting excel info header row:[%s], first col [%s], last col [%s]", header_row,first_col,last_col)
     excel_wb = excel_workbook.ExcelWorkbook(source_spreadsheet_file)
     excel_ws = excel_wb.get_worksheets()
+    for ws in excel_ws:
+        print(str(ws))
     # open_poam_ws = poam_wb[in_open_poam_worksheet_name]
     # For a worksheet, get the table data to create the data dictionary object
 

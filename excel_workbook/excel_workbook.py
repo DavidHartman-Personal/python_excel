@@ -85,7 +85,7 @@ class ExcelWorkbook:
         Returns:
             array object:
         """
-        return_worksheets_list = []
+        return_worksheets_list = list()
         for ws in self.workbook.worksheets:
             return_worksheets_list.append(ws.title)
             # logging.debug("Looking at worksheet: [%s]", str(ws))
