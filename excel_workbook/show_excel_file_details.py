@@ -27,6 +27,8 @@ EXCEL_FILE_DIR = os.path.join(PROJECT_ROOT_DIR, 'excel_files')
 FILENAME_INPUT_CONFIG = os.environ.get('CONFIG_FILE_PATH',
                                        os.path.join(CONF_DIR, 'excel.conf'))
 
+DEFAULT_SPREADSHEET="C:\\Users\\DHARTMAN\\Documents\\Programming\\PycharmProjects\\Data_Dictionary\\input_files\\po_sample.xlsx"
+
 #: Default Excel cell/row/col for a data dictionary worksheet
 DEFAULT_HEADER_ROW='1'
 DEFAULT_FIRST_COL='A'
@@ -40,8 +42,13 @@ def main():
     """The main method for this script.
 
     """
-    source_spreadsheet_name = "sample.xlsx"
-    source_spreadsheet_file = os.path.join(EXCEL_FILE_DIR, source_spreadsheet_name)
+    EXCEL_SOURCE_DIR = "C:\\Users\\DHARTMAN\\Documents\\Programming\\PycharmProjects\\Data_Dictionary\\input_files\\"
+    SOURCE_SPREADSHEET_NAME = "po_sample.xlsx"
+    source_spreadsheet_file = os.path.join(EXCEL_SOURCE_DIR, SOURCE_SPREADSHEET_NAME)
+
+#     source_spreadsheet_name = "sample.xlsx"
+# #    source_spreadsheet_file = os.path.join(EXCEL_FILE_DIR, source_spreadsheet_name)
+#     source_spreadsheet_file = DEFAULT_SPREADSHEET
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('input_file',type=str,help="The spreadsheet file to print the columns of",

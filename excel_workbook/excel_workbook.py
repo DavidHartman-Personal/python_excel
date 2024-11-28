@@ -20,6 +20,7 @@ import os
 import sys
 from openpyxl import load_workbook
 import coloredlogs
+from pprint import pp
 
 #: This effectively defines the root of this project and so adding ..\, etc is not needed in config files
 PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -88,16 +89,19 @@ class ExcelWorkbook:
         return_worksheets_list = list()
         for ws in self.workbook.worksheets:
             return_worksheets_list.append(ws.title)
+            pp(ws)
+            # pp(ws.tables.items())
+            logging.info("Table data dictionary [%s]:", str(ws.tables.items()))
             # logging.debug("Looking at worksheet: [%s]", str(ws))
             # let's add it to the dictionary of worksheets if we haven't already
             if not self.worksheets.get(ws.title):
                 worksheet_object = {}
                 worksheet_title = ws.title
                 worksheet_tables = {}
-                for tbl in ws._tables:
-                    ws_table_name = tbl.name
-                    table_dictionary = self.get_table_data(ws[tbl.ref])
-                    worksheet_tables['TABLE_NAME'] = table_dictionary
+                # for tbl in ws.tables.items():
+                #     #ws_table_name = tbl.name
+                #     table_dictionary = self.get_table_data(ws[tbl.ref])
+                #     worksheet_tables['TABLE_NAME'] = table_dictionary
                 worksheet_object['WORKSHEET_NAME'] = worksheet_title
                 self.worksheets[ws.title] = worksheet_object
         # logging.debug("Worksheets [%s]:", str(return_worksheets_list))
