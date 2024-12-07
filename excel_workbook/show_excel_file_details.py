@@ -46,10 +46,6 @@ def main():
     SOURCE_SPREADSHEET_NAME = "po_sample.xlsx"
     source_spreadsheet_file = os.path.join(EXCEL_SOURCE_DIR, SOURCE_SPREADSHEET_NAME)
 
-#     source_spreadsheet_name = "sample.xlsx"
-# #    source_spreadsheet_file = os.path.join(EXCEL_FILE_DIR, source_spreadsheet_name)
-#     source_spreadsheet_file = DEFAULT_SPREADSHEET
-
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('input_file',type=str,help="The spreadsheet file to print the columns of",
                         nargs='?',default=source_spreadsheet_file)
