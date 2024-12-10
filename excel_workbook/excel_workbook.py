@@ -165,10 +165,39 @@ class ExcelWorkbook2:
                     self.worksheets[ws.title] = ws
 
 
+def get_table_data(table_data):
+    """ Get a Excel table from a worksheet and return it as a dictionary object.
+
+    Args:
+        table_data:
+
+    """
+    return_dictionary_list = []
+    worksheet_table = []
+    # Grab the 'data' from the table
+    rows_list = []
+    for row in table_data:
+        # Get a list of all columns in each row
+        cols = []
+        for col in row:
+            cols.append(col.value)
+            rows_list.append(cols)
+    header_columns = [col.upper() for col in rows_list[0]]
+    for data_row in rows_list[1:]:
+        row_dictionary = zip(header_columns, data_row)
+        return_dictionary_list.append(dict(row_dictionary))
+    logging.info("Table data dictionary [%s]:", str(return_dictionary_list))
+    return return_dictionary_list
+
+
 class ExcelWorkbook:
 
     def __init__(self,
                  workbook_filename):
+        """
+
+        @param workbook_filename:
+        """
         self.workbook_filename = workbook_filename
         self.worksheets = {}
         self.defined_names = []
@@ -178,30 +207,6 @@ class ExcelWorkbook:
         else:
             self.workbook = load_workbook(filename=workbook_filename, data_only=True)
             logging.info("Creating Excel object based on file [%s]", str(workbook_filename))
-
-    def get_table_data(self, table_data):
-        """ Get a Excel table from a worksheet and return it as a dictionary object.
-
-        Args:
-            table_data:
-
-        """
-        return_dictionary_list = []
-        worksheet_table = []
-        # Grab the 'data' from the table
-        rows_list = []
-        for row in table_data:
-            # Get a list of all columns in each row
-            cols = []
-            for col in row:
-                cols.append(col.value)
-                rows_list.append(cols)
-        header_columns = [col.upper() for col in rows_list[0]]
-        for data_row in rows_list[1:]:
-            row_dictionary = zip(header_columns, data_row)
-            return_dictionary_list.append(dict(row_dictionary))
-        logging.info("Table data dictionary [%s]:", str(return_dictionary_list))
-        return return_dictionary_list
 
     def get_worksheets(self) -> []:
         """Returns an array of the worksheet objects in the workbook and populates/updates ExcelWorkbook.worksheets array

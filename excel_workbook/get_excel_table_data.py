@@ -7,7 +7,7 @@ def get_all_tables(filename):
         Requires a filename, which includes the file path and filename. """
 
     # Load the workbook, from the filename, setting read_only to False
-    wb = load_workbook(filename=file, read_only=False, keep_vba=False, data_only=True, keep_links=False)
+    wb = load_workbook(filename=filename, read_only=False, keep_vba=False, data_only=True, keep_links=False)
 
     # Initialize the dictionary of tables
     tables_dict = {}
