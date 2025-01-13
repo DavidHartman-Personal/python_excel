@@ -46,6 +46,7 @@ class ExcelWorkbook:
 
     def __init__(self,
                  workbook_filename):
+        logging.info("Creating ExcelWorkbook object based on file [%s]", str(workbook_filename))
         self.workbook_filename = workbook_filename
         self.worksheets = {}
         self.defined_names = []
@@ -53,8 +54,9 @@ class ExcelWorkbook:
             logging.error("File not found [%s], if writing pass write_flag = True", str(workbook_filename))
             self.workbook = None
         else:
-            self.workbook = load_workbook(filename=workbook_filename, data_only=True)
             logging.info("Creating Excel object based on file [%s]", str(workbook_filename))
+            self.workbook = load_workbook(filename=workbook_filename, data_only=True)
+            logging.info("Createc Excel object based on file [%s]", str(workbook_filename))
 
     def get_defined_tables(self, worksheet_name=None):
         if not worksheet_name:
@@ -114,9 +116,9 @@ class ExcelWorkbook:
         return_worksheets_list = list()
         for ws in self.workbook.worksheets:
             return_worksheets_list.append(ws.title)
-            pp(ws)
+            # pp(ws)
             # pp(ws.tables.items())
-            logging.info("Table data dictionary [%s]:", str(ws.tables.items()))
+            # logging.info("Table data dictionary [%s]:", str(ws.tables.items()))
             # logging.debug("Looking at worksheet: [%s]", str(ws))
             # let's add it to the dictionary of worksheets if we haven't already
             if not self.worksheets.get(ws.title):

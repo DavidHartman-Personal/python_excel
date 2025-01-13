@@ -7,9 +7,10 @@ This script will open an Excel Workbook and then show some details about the wor
 import argparse
 import configparser
 import os
-import excel_workbook
+import ExcelWorkbook
 import logging
 import coloredlogs
+from pathlib import Path
 
 #: This effectively defines the root of the project and so adding ..\, etc. is not needed in config files
 PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -38,6 +39,26 @@ coloredlogs.install(level=logging.DEBUG,
                     fmt="%(asctime)s %(hostname)s %(name)s %(filename)s line-%(lineno)d %(levelname)s - %(message)s",
                     datefmt='%H:%M:%S')
 
+def get_worksheets(excel_file: Path) -> []:
+    """The main method for this script.
+
+    """
+    # Check if Excel file exists.
+    if Path(excel_file).is_dir():
+        logging.error("Excel File is a directory:[%s]", str(excel_file))
+        raise TypeError("Excel File is a directory")
+    else:
+        if not Path(excel_file).exists():
+            logging.error("File does not exists: [%s]", str(excel_file))
+            raise FileExistsError
+    logging.info("Creating Workbook")
+    excel_wb = ExcelWorkbook.ExcelWorkbook(excel_file)
+    logging.info("Getting worksheets")
+    pil_logger = logging.getLogger('PIL')
+    pil_logger.setLevel(logging.INFO)
+    excel_ws = excel_wb.get_worksheets()
+    return excel_ws
+
 def main():
     """The main method for this script.
 
@@ -65,7 +86,7 @@ def main():
     first_col = config.get('data_dictionary', 'first_col',fallback=DEFAULT_FIRST_COL)
     last_col = config.get('data_dictionary', 'last_col',fallback=DEFAULT_LAST_COL)
     logging.info("Getting excel info header row:[%s], first col [%s], last col [%s]", header_row,first_col,last_col)
-    excel_wb = excel_workbook.ExcelWorkbook(source_spreadsheet_file)
+    excel_wb = ExcelWorkbook.ExcelWorkbook(source_spreadsheet_file)
     excel_ws = excel_wb.get_worksheets()
     for ws in excel_ws:
         print(str(ws))
@@ -76,4 +97,6 @@ def main():
 
 
 if __name__ == "__main__":
+    # Include pass for now to prevent script from doing any processing when imported.
+    #pass
     main()
